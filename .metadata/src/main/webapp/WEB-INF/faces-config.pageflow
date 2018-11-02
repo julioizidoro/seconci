@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15407720329910" configfile="/primefaces-responsivo/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="754" id="pf15407721172181" referenceLink="//@navigationRule.4/@fromViewId|" outlinks="pf15407721172192 pf15407721172194 pf15407721796659 pf15408259226530 pf15408312412680" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="338" y="178" id="pf15407721172196" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15407721172192" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/relatorio/cadRelatorio.xhtml" x="338" y="562" id="pf15407721172198" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf15407721172194" path="/pages/relatorio/cadRelatorio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/relatorio/consRelatorios.xhtml" x="338" y="946" id="pf154077217966510" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf15407721796659" path="/pages/relatorio/consRelatorios.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/dashboard/dashboard.xhtml" x="338" y="1330" id="pf15408259226532" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf15408259226530" path="/pages/dashboard/dashboard.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/relatorio/cadrelatorioitemnorma.xhtml" id="pf15408312412681" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf15408312412680" path="/pages/relatorio/cadrelatorioitemnorma.xhtml"/>
+  <links id="pf15407721172192" target="pf15407721172196" source="pf15407721172181" outcome="index" redirect="true"/>
+  <links id="pf15407721172194" target="pf15407721172198" source="pf15407721172181" outcome="cadastroRelatorio" redirect="true"/>
+  <links id="pf15407721796659" target="pf154077217966510" source="pf15407721172181" outcome="consultaRelatorios" redirect="true"/>
+  <links id="pf15408259226530" target="pf15408259226532" source="pf15407721172181" outcome="dashboard" redirect="true"/>
+  <links id="pf15408312412680" target="pf15408312412681" source="pf15407721172181" outcome="cadRelatorioItemNorma" redirect="true"/>
+</pageflow:Pageflow>

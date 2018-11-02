@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>SECONCI</title>
+	
+	<h:outputStylesheet library="seconci" name="styles/layout.css" />
+	<h:outputStylesheet library="seconci" name="styles/components.css" />
+	<h:outputStylesheet library="seconci" name="styles/custom.css" />
+	<h:outputScript target="body" library="primefaces" name='jquery/jquery.js'/>
+	<h:outputScript target="body" library="seconci" name="javascripts/app.js" />
+	
+</h:head>
+
+<h:body>
+
+	<header class="ji-topbar">
+		<h:graphicImage library="seconci" name="images/logo.jpg" style="width:130px" />
+		
+		<a href="#" class="ji-toggle js-toggle"><i class="fa  fa-bars"></i></a>
+	</header>
+	<h:form>
+	<aside class="ji-sidebar js-sidebar">
+		<nav class="ji-menu">
+			<ul>
+				<li class="is-selected" style="margin-top:50px;">
+					<p:commandLink value="Itens da Norma" action="#" update="@all">
+						<i class="fa  fa-fw  fa-book"></i>
+					</p:commandLink>	
+				</li>
+				<li>
+					<p:commandLink value="Relatorios" action="#{menuMB.consultaRelatorios()}" update="@all">
+						
+					</p:commandLink>
+				</li>
+				<li>
+					<p:commandLink value="Sair" action="#{menuMB.sair()}" update="@all">
+					
+					</p:commandLink> 
+				</li>
+			</ul>
+
+		</nav>
+	</aside>
+	</h:form>
+	<section class="ji-content js-content">
+		<ui:insert name="content" />
+	
+	</section>
+	
+	
+</h:body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layout.xhtml">
+
+
+
+	<ui:define name="content">
+		<h1 class="ji-page-title">Realtório Item da Norma</h1>
+		<h:form id="cadrelatorioitemnorma">
+			<p:toolbar id="toolbarcadrelatorioitemnorma">
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Salvar" icon="ui-icon-check" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="left" style="margin-left:10px;">
+					<p:commandButton value="Cancelar" icon="ui-icon-closethick" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<div class="ui-fluid">
+				<p:tabView id="tabviewcadrelatorioitemnorma"
+					style="margin-top:10px;">
+					<p:tab title="Iem da norma">
+					<p:commandButton value = "Pesquisar Item" style="margin-tpo: 10px; width: auto" action="#" update="@all"/>
+					<hr/>
+					<p:panelGrid columns="2" layout="grid" style="margin-top: 10px;" 
+							styleClass="panelgrid-noborder"
+							columnClasses="ui-grid-col-2, ui-grid-col-8">
+
+							<p:outputLabel value="Não conformidade" for="naoconformidade" styleClass="ji-title" />
+							<p:inputText id="naoconformidade" value="#{cadRelatorioItemNormaMB.relatorioItem.nome}" maxlength="100"
+								readonly="true" />
+							<p:outputLabel/>
+							<p:outputLabel/>
+							 <p:outputLabel value="Item da Norma" for="itemnorma" styleClass="ji-title" />
+							<p:inputText id="itemnorma" value="#{cadRelatorioItemNormaMB.relatorioItem.itemnorma}" maxlength="100"
+								readonly="true" />
+					</p:panelGrid>
+					<p:panelGrid columns="1"  id="painelcomentario" layout="grid" style="margin-top: 10px;" 
+							styleClass="panelgrid-noborder"
+							columnClasses="ui-grid-col-12">
+							<hr/>
+							<p:outputLabel value="Descrição" styleClass="ji-title" />
+							
+							<p:outputLabel/>
+							<p:outputLabel/>
+							<ui:repeat var="itemdescricao" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemdescricaoList}">
+								<h:panelGroup>
+									<p:selectBooleanCheckbox  valeu="#{itemdescricao.selecionado}"/>
+									<p:outputLabel value="#{itemdescricao.descricao}" style="margin-left: 1%"/>
+								<br/><br/>
+								</h:panelGroup>
+								
+							</ui:repeat>
+							<br/>
+							<hr/>
+							<p:outputLabel value="Comentários/Sugestões" styleClass="ji-title"/>
+							<br/>
+							<ui:repeat var="itemcomentario" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentarioList}">
+								<h:panelGroup>
+									<p:selectBooleanCheckbox  valeu="#{itemcomentario.selecionado}"/>
+									<p:outputLabel value="#{itemcomentario.comentario}" style="margin-left: 1%" />
+									<br/><br/>
+								</h:panelGroup>
+							</ui:repeat>
+							<br />
+							<p:commandButton value="Novo comenttário" style="margin-tpo: 10px; width: auto" action="#" oncomplete="PF('novocomentarioDialog').show()" />
+							<hr/>
+								<p:dataGrid var="itemimagens" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentariofotoList}" columns="3"
+									layout="grid" rows="1" paginator="false">
+									<h:panelGrid>
+										<img src="#{cadRelatorioItemNormaMB.nomeComentarioFoto(itemimagens)}" style="width: 50%;"/>
+										<div align="center">
+											<p:selectBooleanCheckbox value="#{itemimagem.selecionado}"  />
+										</div>
+										
+									</h:panelGrid>
+									
+								</p:dataGrid> 
+						</p:panelGrid>
+
+					</p:tab>
+					<p:tab title="Fotos da Obra">
+						<p:commandButton value="Carregar foto"
+							style="margin-tpo: 10px; width: auto" action="#" />
+						<p:dataTable id="tabelaitemfoto" value="#" var="foto"
+							scrollHeight="300" reflow="true" style="margin-top: 10px;">
+							<p:column headerText="Foto carregada">
+								<p:graphicImage value="#" />
+							</p:column>
+							<p:column style="width:43px;text-align:center;">
+								<p:commandLink action="#" title="Excluir"
+									style="text-decoration: none">
+									<i class="fa  fa-edit" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+
+					</p:tab>
+
+				</p:tabView>
+			</div>
+			<p:dialog widgetVar="novocomentarioDialog" id="novocomentarioDialog" header="Novo Comentário" resizable="false" responsive="true">
+				<div class="ui-fluid">
+				<p:panelGrid columns="2" layout="grid" styleClass="panelgrid-noboard" columnClasses="ui-grid-col-2,ui-grid-col-10" >
+					<p:outputLabel value="Cometário" for="novocomentario"/>
+					<p:inputText id="novocomentario" value="#{cadRelatorioItemNormaMB.novoComentario}" required="true" size="70"/>
+					<p:outputLabel/>
+					<p:commandButton value="Adicionar" style="text-align:center;width: auto;" action="#{cadRelatorioItemNormaMB.incluirNovoComentario()}" 
+							update="tabviewcadrelatorioitemnorma:painelcomentario" oncomplete="PF('novocomentarioDialog').hide()" />
+				</p:panelGrid>
+			</div>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

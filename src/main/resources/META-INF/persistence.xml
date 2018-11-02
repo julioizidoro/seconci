@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="seconciPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>br.com.seconci.model.Departamento</class>
+    <class>br.com.seconci.model.Funcao</class>
+    <class>br.com.seconci.model.Normacomentario</class>
+    <class>br.com.seconci.model.Normacomentariofoto</class>
+    <class>br.com.seconci.model.Normadescricao</class>
+    <class>br.com.seconci.model.Normaitem</class>
+    <class>br.com.seconci.model.Normatitulo</class>
+    <class>br.com.seconci.model.Relatorio</class>
+    <class>br.com.seconci.model.Relatorioitem</class>
+    <class>br.com.seconci.model.Relatorioitemcomentario</class>
+    <class>br.com.seconci.model.Relatorioitemcomentariofoto</class>
+    <class>br.com.seconci.model.Relatorioitemdescricao</class>
+    <class>br.com.seconci.model.Relatoriotipo</class>
+    <class>br.com.seconci.model.Usuario</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <validation-mode>NONE</validation-mode>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/seconci?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="simples"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+    </properties>
+  </persistence-unit>
+</persistence>
