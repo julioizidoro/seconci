@@ -13,72 +13,137 @@
 		<h:form id="cadrelatorio">
 			<p:toolbar id="toolbarcadrelatorio">
 				<p:toolbarGroup align="left">
-					<p:commandButton value="Salvar" icon="ui-icon-check" action="#" ajax="false"/>
+					<p:commandButton value="Salvar" icon="ui-icon-check" action="#"
+						ajax="false" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="left" style="margin-left:10px;">
 					<p:commandButton value="Cancelar" icon="ui-icon-closethick" />
 				</p:toolbarGroup>
 			</p:toolbar>
 			<div class="ui-fluid">
-			<p:tabView  id="tabviewcadrelatorio" style="margin-top:10px;"  >
-				<p:tab title="Dados da Empresa/Obra">
-					<p:panelGrid columns="4" layout="grid"  styleClass="panelgrid-noborder"
-						columnClasses="ui-grid-col-2, ui-grid-col-4,ui-grid-col-2,ui-grid-col-4">
-					
-					<p:outputLabel value="Tipo de Relatório" for="tipo"/>
-					<p:selectOneMenu id="tipo" value="#{cadRelatorioMB.relatorioTipo}" 
-								converter="RelatorioTipoConverter"
-								 panelStyle="width:180px" required="false">
-								<f:selectItem itemLabel="Selecione" itemValue="0" noSelectionOption="true" />
-								<f:selectItems id="idtipo" value="#{cadRelatorioMB.listaTipo}" var="sTipo"
-									itemLabel="#{sTipo.titulo}" itemValue="#{sTipo}"  />
-								<f:attribute name="listaTipo" value="#{cadRelatorioMB.listaTipo}" />
-					</p:selectOneMenu>
-					<p:outputLabel/>
-					<p:outputLabel/>
-					<p:outputLabel value="Empresa" for="empresa"/>
-					<p:inputText id="empresa" required="true" value="#{cadRelatorioMB.relatorio.empresa}" maxlength="100"/>
-					
-					<p:outputLabel value="Data da Visita" for="datavisita"/>
-					<p:calendar id="datavisita" value="#{cadRelatorioMB.relatorio.data}" size="12"
-						locale="pt" pattern="dd/MM/yyyy" mask="true" maxlength="15" required="true">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
-						<p:ajax event="blur" />
-					</p:calendar>
-					<p:outputLabel value="Canteiro de obra" for="canteiro"/>
-					<p:inputText id="canteiro" required="true" value="#{cadRelatorioMB.relatorio.canteiroobras}" maxlength="100"/>
-					<p:outputLabel value="Fase" for="fase" />
-					<p:inputText id="fase" required="true" value="#{cadRelatorioMB.relatorio.fase}" maxlength="100" />
-					<p:outputLabel value="No. Trabalhadores" for="ntrabalhadores" />
-					<p:inputText id="ntrabalhadores"  value="#{cadRelatorioMB.relatorio.numerotrabalhadores}" maxlength="100" />
-					<p:outputLabel value="Empresa Acompanhante" for="empresaacopanhante"/>
-					<p:inputText id="empresaacopanhante"  value="#{cadRelatorioMB.relatorio.empresaacopanhante}" maxlength="100"/>					
-					<p:outputLabel value="Acompanhante" for="acompanhante"/>
-					<p:inputText id="acompanhante"  value="#{cadRelatorioMB.relatorio.acompanhante}" maxlength="100"/>	
-					<p:outputLabel value="Função" for="funcao"/>
-					<p:inputText id="funcao"  value="#{cadRelatorioMB.relatorio.funcao}" maxlength="100"/>					
-					
-					
-					</p:panelGrid>
-					
-				</p:tab>
-				<p:tab title="Itens da Norma">
-				<p:commandButton value="Novo Item" style="margin-tpo: 10px; width: auto" action="#{cadRelatorioMB.cadRelatorioItemNorma()}" ajax="false" />
-					<p:dataTable id="tabelaitemrelatorio" value="#{cadRelatorioMB.relatorio.relatorioitemList}" var="item" scrollHeight="300" reflow="true" style="margin-top: 10px;">
-						<p:column headerText="Nome">
-							<p:outputLabel value="#{item.nome}"/>
-						</p:column>
-						<p:column headerText="Item da norma">
-							<p:outputLabel value="#{item.itemnorma}"/>
-						</p:column>
-					</p:dataTable>
-					
-				</p:tab>
-				
-			</p:tabView>
+				<p:tabView id="tabviewcadrelatorio" style="margin-top:10px;">
+					<p:tab title="Dados da Empresa/Obra">
+						<p:panelGrid columns="4" layout="grid"
+							styleClass="panelgrid-noborder"
+							columnClasses="ui-grid-col-2, ui-grid-col-4,ui-grid-col-2,ui-grid-col-4">
+
+							<p:outputLabel value="Tipo de Relatório" for="tipo" />
+							<p:selectOneMenu id="tipo"
+								value="#{cadRelatorioMB.relatorioTipo}"
+								converter="RelatorioTipoConverter" panelStyle="width:180px"
+								required="false">
+								<f:selectItem itemLabel="Selecione" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems id="idtipo" value="#{cadRelatorioMB.listaTipo}"
+									var="sTipo" itemLabel="#{sTipo.titulo}" itemValue="#{sTipo}" />
+								<f:attribute name="listaTipo"
+									value="#{cadRelatorioMB.listaTipo}" />
+							</p:selectOneMenu>
+							<p:outputLabel />
+							<p:outputLabel />
+							<p:outputLabel value="Empresa" for="empresa" />
+							<p:inputText id="empresa" required="true"
+								value="#{cadRelatorioMB.relatorio.empresa}" maxlength="100" />
+
+							<p:outputLabel value="Data da Visita" for="datavisita" />
+							<p:calendar id="datavisita"
+								value="#{cadRelatorioMB.relatorio.data}" size="12" locale="pt"
+								pattern="dd/MM/yyyy" mask="true" maxlength="15" required="true">
+								<f:convertDateTime pattern="dd/MM/yyyy"
+									timeZone="America/Sao_Paulo" />
+								<p:ajax event="blur" />
+							</p:calendar>
+							<p:outputLabel value="Canteiro de obra" for="canteiro" />
+							<p:inputText id="canteiro" required="true"
+								value="#{cadRelatorioMB.relatorio.canteiroobras}"
+								maxlength="100" />
+							<p:outputLabel value="Fase" for="fase" />
+							<p:inputText id="fase" required="true"
+								value="#{cadRelatorioMB.relatorio.fase}" maxlength="100" />
+							<p:outputLabel value="No. Trabalhadores" for="ntrabalhadores" />
+							<p:inputText id="ntrabalhadores"
+								value="#{cadRelatorioMB.relatorio.numerotrabalhadores}"
+								maxlength="100" />
+							<p:outputLabel value="Empresa Acompanhante"
+								for="empresaacopanhante" />
+							<p:inputText id="empresaacopanhante"
+								value="#{cadRelatorioMB.relatorio.empresaacopanhante}"
+								maxlength="100" />
+							<p:outputLabel value="Acompanhante" for="acompanhante" />
+							<p:inputText id="acompanhante"
+								value="#{cadRelatorioMB.relatorio.acompanhante}" maxlength="100" />
+							<p:outputLabel value="Função" for="funcao" />
+							<p:inputText id="funcao"
+								value="#{cadRelatorioMB.relatorio.funcao}" maxlength="100" />
+
+
+						</p:panelGrid>
+
+					</p:tab>
+					<p:tab title="Itens da Norma">
+						<p:commandButton value="Novo Item"
+							style="margin-tpo: 10px; width: auto" oncomplete="PF('consultaItemNormaDialog').show()" />
+						<p:dataTable id="tabelaitemrelatorio"
+							value="#{cadRelatorioMB.relatorio.relatorioitemList}" var="item"
+							scrollHeight="300" reflow="true" style="margin-top: 10px;">
+							<p:column headerText="Nome">
+								<p:outputLabel value="#{item.nome}" />
+							</p:column>
+							<p:column headerText="Item da norma">
+								<p:outputLabel value="#{item.itemnorma}" />
+							</p:column>
+						</p:dataTable>
+
+					</p:tab>
+
+				</p:tabView>
+
+				<p:dialog widgetVar="consultaItemNormaDialog"
+					id="consultaItemNormaDialog" header="Itens da Norma"
+					resizable="false" responsive="true">
+					<div class="ui-fluid">
+						<p:panelGrid columns="1" layout="grid"
+							>
+
+							<p:dataTable id="tabelaitensnorma"
+								value="#{cadRelatorioMB.listaNormaItem}" var="normaItem"
+								widgetVar="normaItemTable" style="margin-top: 20px;"
+								scrollable="true" scrollHeight="300" reflow="true">
+								<p:column headerText="Título" filterBy="#{normaItem.normatitulo}"
+									filterMatchMode="contains" width="50">
+									<f:facet name="filter">
+										<p:selectOneMenu onchange="PF('normaItemTable').filter()"
+											styleClass="custom-filter">
+											<f:selectItem itemLabel="Selecione" itemValue="#{null}"
+												noSelectionOption="true" />
+											<f:selectItems
+												value="#{cadRelatorioMB.listaNormaTitulo}" var="normaTitulo"  itemLabel="#{normaTitulo.titulo}"/>
+										</p:selectOneMenu>
+									</f:facet>
+									<h:outputLabel value="#{normaItem.normatitulo.titulo}" />
+								</p:column>
+								<p:column headerText="Nome" filterBy="#{normaItem.nome}"
+									filterMatchMode="contains" width="100">
+									<h:outputLabel value="#{normaItem.nome}" />
+								</p:column>
+								<p:column headerText="Item da norma"
+									filterBy="#{normaItem.itemnorma}" 
+									filterMatchMode="contains" width="50">
+									<h:outputLabel value="#{normaItem.itemnorma}" />
+								</p:column>
+
+								<p:column style="width:43px;text-align:center;">
+									<p:commandLink action="#{cadRelatorioMB.cadRelatorioItemNorma(normaItem)}" title="Editar" style="text-decoration: none" >
+										<i class="fa fa-cloud-download"/>
+									</p:commandLink>  
+								</p:column>  
+							</p:dataTable>
+						</p:panelGrid>
+					</div>
+				</p:dialog>
 			</div>
 		</h:form>
 	</ui:define>
-	
+
 
 </ui:composition>

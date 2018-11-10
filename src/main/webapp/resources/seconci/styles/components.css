@@ -65,3 +65,14 @@
 	font-weight: bold;
 	
 }
+
+/*DESCRICAO COMENTARIO */
+.ji-descricaocomentarionovo{
+	margin-left : 1%;
+	color: blue;
+}
+
+.ji-descricaocomentariopadrao{
+	color: black;
+	margin-left: 1%;
+}

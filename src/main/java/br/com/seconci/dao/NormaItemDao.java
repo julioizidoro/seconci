@@ -1,6 +1,7 @@
 package br.com.seconci.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -22,6 +23,16 @@ public class NormaItemDao implements Serializable {
         } 
         return norma;
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Normaitem> listar(String sql){
+		Query q = manager.createQuery(sql); 
+        List<Normaitem> lista = null;
+        if (q.getResultList().size() > 0) {
+        		lista  =   q.getResultList();
+        } 
+        return lista;
 	}
 
 }

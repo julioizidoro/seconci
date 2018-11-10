@@ -9,6 +9,7 @@
 
 
 	<ui:define name="content">
+	<h:outputStylesheet library="seconci" name="styles/components.css" />
 		<h1 class="ji-page-title">Realtório Item da Norma</h1>
 		<h:form id="cadrelatorioitemnorma">
 			<p:toolbar id="toolbarcadrelatorioitemnorma">
@@ -58,27 +59,29 @@
 							<hr/>
 							<p:outputLabel value="Comentários/Sugestões" styleClass="ji-title"/>
 							<br/>
-							<ui:repeat var="itemcomentario" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentarioList}">
+							<ui:repeat id="repeatcomentario" var="itemcomentario" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentarioList}" varStatus="status">
 								<h:panelGroup>
-									<p:selectBooleanCheckbox  valeu="#{itemcomentario.selecionado}"/>
-									<p:outputLabel value="#{itemcomentario.comentario}" style="margin-left: 1%" />
+									<p:selectBooleanCheckbox  valeu="#{itemcomentario.selecionado}" >
+										<p:ajax update="cadrelatorioitemnorma:tabviewcadrelatorioitemnorma:painelcomentario" listener="#{cadRelatorioItemNormaMB.excluirComentario(status.index)}" />
+									</p:selectBooleanCheckbox>
+									<p:outputLabel value="#{itemcomentario.comentario}" styleClass="#{cadRelatorioItemNormaMB.styleComentario(itemcomentario)}" />
 									<br/><br/>
 								</h:panelGroup>
 							</ui:repeat>
 							<br />
 							<p:commandButton value="Novo comenttário" style="margin-tpo: 10px; width: auto" action="#" oncomplete="PF('novocomentarioDialog').show()" />
 							<hr/>
-								<p:dataGrid var="itemimagens" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentariofotoList}" columns="3"
+								 <p:dataGrid var="itemimagens" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentariofotoList}" columns="3"
 									layout="grid" rows="1" paginator="false">
 									<h:panelGrid>
 										<img src="#{cadRelatorioItemNormaMB.nomeComentarioFoto(itemimagens)}" style="width: 50%;"/>
 										<div align="center">
-											<p:selectBooleanCheckbox value="#{itemimagem.selecionado}"  />
+											<p:selectBooleanCheckbox value="#{itemimagens.selecionado}"  />
 										</div>
 										
 									</h:panelGrid>
 									
-								</p:dataGrid> 
+								</p:dataGrid>  
 						</p:panelGrid>
 
 					</p:tab>

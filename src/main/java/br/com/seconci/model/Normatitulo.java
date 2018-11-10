@@ -94,7 +94,7 @@ public class Normatitulo implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.seconci.model.Normatitulo[ idnormatitulo=" + idnormatitulo + " ]";
+        return getTitulo();
     }
     
 }

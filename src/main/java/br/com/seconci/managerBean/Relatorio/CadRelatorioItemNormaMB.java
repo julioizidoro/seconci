@@ -38,10 +38,13 @@ public class CadRelatorioItemNormaMB implements Serializable{
 	private void init() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
-		relatorio = (Relatorio) session.getAttribute("relatorio");
-		relatorioItem = new Relatorioitem();
-		novoComentario="";
-		consultaNormaItem();
+		if (relatorio==null) {
+			relatorio = (Relatorio) session.getAttribute("relatorio");
+			relatorioItem = new Relatorioitem();
+			Normaitem norma = (Normaitem) session.getAttribute("normaItem");
+			consultaNormaItem(norma);
+			novoComentario="";
+		}
 	}
 
 	public Relatorio getRelatorio() {
@@ -68,8 +71,8 @@ public class CadRelatorioItemNormaMB implements Serializable{
 		this.novoComentario = novoComentario;
 	}
 
-	public void consultaNormaItem() {
-		Normaitem norma = normaItemDao.pesquisar(32);
+	public void consultaNormaItem(Normaitem norma) {
+		norma = normaItemDao.pesquisar(norma.getIdnormaitem());
 		if (norma!=null) {
 			relatorioItem.setItemnorma(norma.getItemnorma());
 			relatorioItem.setNome(norma.getNome());
@@ -115,7 +118,7 @@ public class CadRelatorioItemNormaMB implements Serializable{
 				String nome = String.valueOf(norma.getNormacomentariofotoList().get(i).getIdnormacomentariofoto());
 				nome = nome + "_" + norma.getNormacomentariofotoList().get(i).getNomearquivo();
 				relatorioItemComentariofoto.setNomrarquivo(nome);
-				relatorioItemComentariofoto.setSelecionado(false);
+				relatorioItemComentariofoto.setSelecionado(true);
 				relatorioItemComentariofoto.setRelatorioitem(relatorioItem);
 				relatorioItem.getRelatorioitemcomentariofotoList().add(relatorioItemComentariofoto);
 			}
@@ -140,9 +143,27 @@ public class CadRelatorioItemNormaMB implements Serializable{
 			relatorioItemComentario.setRelatorioitem(relatorioItem);
 			relatorioItemComentario.setNovo(true);
 			relatorioItem.getRelatorioitemcomentarioList().add(relatorioItemComentario);
+			novoComentario = "";
 		}
+		
 		return null;
 	}
+	
+	public void excluirComentario(int index) {
+		Relatorioitemcomentario comentario = relatorioItem.getRelatorioitemcomentarioList().get(index);
+		if ((comentario.isSelecionado()) && (!comentario.isNovo())) {
+			relatorioItem.getRelatorioitemcomentarioList().remove(index);
+		}
+	}
+	
+	public String styleComentario(Relatorioitemcomentario comentario) {
+		if (comentario.isNovo()) {
+			return "ji-descricaocomentarionovo";
+		}
+		return "ji-descricaocomentariopadrao";
+	}
+	
+	
 
 	
 
