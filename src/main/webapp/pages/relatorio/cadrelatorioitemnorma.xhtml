@@ -9,23 +9,20 @@
 
 
 	<ui:define name="content">
-	<h:outputStylesheet library="seconci" name="styles/components.css" />
-		<h1 class="ji-page-title">Realtório Item da Norma</h1>
+		<h1 class="ji-page-title">Relatório Item da Norma</h1>
 		<h:form id="cadrelatorioitemnorma">
 			<p:toolbar id="toolbarcadrelatorioitemnorma">
 				<p:toolbarGroup align="left">
-					<p:commandButton value="Salvar" icon="ui-icon-check" />
+					<p:commandButton value="Salvar" icon="ui-icon-check" action="#{cadRelatorioItemNormaMB.salvar()}" ajax="false"/>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="left" style="margin-left:10px;">
 					<p:commandButton value="Cancelar" icon="ui-icon-closethick" />
 				</p:toolbarGroup>
 			</p:toolbar>
-			<div class="ui-fluid">
+			<div class="ui-fluid" >
 				<p:tabView id="tabviewcadrelatorioitemnorma"
 					style="margin-top:10px;">
 					<p:tab title="Iem da norma">
-					<p:commandButton value = "Pesquisar Item" style="margin-tpo: 10px; width: auto" action="#" update="@all"/>
-					<hr/>
 					<p:panelGrid columns="2" layout="grid" style="margin-top: 10px;" 
 							styleClass="panelgrid-noborder"
 							columnClasses="ui-grid-col-2, ui-grid-col-8">
@@ -62,14 +59,14 @@
 							<ui:repeat id="repeatcomentario" var="itemcomentario" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentarioList}" varStatus="status">
 								<h:panelGroup>
 									<p:selectBooleanCheckbox  valeu="#{itemcomentario.selecionado}" >
-										<p:ajax update="cadrelatorioitemnorma:tabviewcadrelatorioitemnorma:painelcomentario" listener="#{cadRelatorioItemNormaMB.excluirComentario(status.index)}" />
+										<p:ajax  event="change" update="repeatcomentario" listener="#{cadRelatorioItemNormaMB.excluirComentario(status.index)}" />
 									</p:selectBooleanCheckbox>
 									<p:outputLabel value="#{itemcomentario.comentario}" styleClass="#{cadRelatorioItemNormaMB.styleComentario(itemcomentario)}" />
 									<br/><br/>
 								</h:panelGroup>
 							</ui:repeat>
 							<br />
-							<p:commandButton value="Novo comenttário" style="margin-tpo: 10px; width: auto" action="#" oncomplete="PF('novocomentarioDialog').show()" />
+							<p:commandButton value="Novo comenttário" style="margin-tpo: 10px; width: auto" oncomplete="PF('novocomentarioDialog').show()" />
 							<hr/>
 								 <p:dataGrid var="itemimagens" value="#{cadRelatorioItemNormaMB.relatorioItem.relatorioitemcomentariofotoList}" columns="3"
 									layout="grid" rows="1" paginator="false">
@@ -112,7 +109,7 @@
 					<p:inputText id="novocomentario" value="#{cadRelatorioItemNormaMB.novoComentario}" required="true" size="70"/>
 					<p:outputLabel/>
 					<p:commandButton value="Adicionar" style="text-align:center;width: auto;" action="#{cadRelatorioItemNormaMB.incluirNovoComentario()}" 
-							update="tabviewcadrelatorioitemnorma:painelcomentario" oncomplete="PF('novocomentarioDialog').hide()" />
+							update="tabviewcadrelatorioitemnorma:repeatcomentario" oncomplete="PF('novocomentarioDialog').hide()" />
 				</p:panelGrid>
 			</div>
 			</p:dialog>

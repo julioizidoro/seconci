@@ -6,6 +6,7 @@
 package br.com.seconci.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -26,8 +25,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "relatorioitemdescricao")
-@NamedQueries({
-    @NamedQuery(name = "Relatorioitemdescricao.findAll", query = "SELECT r FROM Relatorioitemdescricao r")})
 public class Relatorioitemdescricao implements Serializable {
 
     private static final long serialVersionUID = 1L;

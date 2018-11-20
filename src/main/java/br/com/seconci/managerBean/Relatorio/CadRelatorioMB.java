@@ -122,6 +122,7 @@ public class CadRelatorioMB implements Serializable{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 		session.setAttribute("normaItem", normaItem);
+		session.setAttribute("relatorio", relatorio);
 		return "cadRelatorioItemNorma";
 	}
 	

@@ -11,6 +11,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import br.com.seconci.dao.NormaItemDao;
+import br.com.seconci.dao.RelatorioDao;
+import br.com.seconci.dao.RelatorioItemDao;
 import br.com.seconci.model.Normaitem;
 import br.com.seconci.model.Relatorio;
 import br.com.seconci.model.Relatorioitem;
@@ -27,7 +29,8 @@ public class CadRelatorioItemNormaMB implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Inject
+	private RelatorioItemDao relatorioItemDao;
 	@Inject
 	private NormaItemDao normaItemDao;
 	private Relatorio relatorio;
@@ -118,7 +121,7 @@ public class CadRelatorioItemNormaMB implements Serializable{
 				String nome = String.valueOf(norma.getNormacomentariofotoList().get(i).getIdnormacomentariofoto());
 				nome = nome + "_" + norma.getNormacomentariofotoList().get(i).getNomearquivo();
 				relatorioItemComentariofoto.setNomrarquivo(nome);
-				relatorioItemComentariofoto.setSelecionado(true);
+				relatorioItemComentariofoto.setSelecionado(false);
 				relatorioItemComentariofoto.setRelatorioitem(relatorioItem);
 				relatorioItem.getRelatorioitemcomentariofotoList().add(relatorioItemComentariofoto);
 			}
@@ -135,7 +138,7 @@ public class CadRelatorioItemNormaMB implements Serializable{
 		return "cadastroRelatorio";
 	}
 	
-	public String incluirNovoComentario() {
+	public void incluirNovoComentario() {
 		if (novoComentario.length()>0) {
 			Relatorioitemcomentario  relatorioItemComentario = new Relatorioitemcomentario();
 			relatorioItemComentario.setComentario(novoComentario);
@@ -145,8 +148,6 @@ public class CadRelatorioItemNormaMB implements Serializable{
 			relatorioItem.getRelatorioitemcomentarioList().add(relatorioItemComentario);
 			novoComentario = "";
 		}
-		
-		return null;
 	}
 	
 	public void excluirComentario(int index) {
@@ -161,6 +162,16 @@ public class CadRelatorioItemNormaMB implements Serializable{
 			return "ji-descricaocomentarionovo";
 		}
 		return "ji-descricaocomentariopadrao";
+	}
+	
+	public String salvar() {
+		relatorioItem =  relatorioItemDao.salvar(relatorioItem);
+		FacesContext fc = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
+		session.removeAttribute("NormaItem");
+		session.removeAttribute("relatorio");
+		session.setAttribute("relatorio", relatorioItem.getRelatorio());
+		return "cadastroRelatorio";
 	}
 	
 	
